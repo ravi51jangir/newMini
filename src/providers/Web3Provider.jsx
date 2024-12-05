@@ -1,6 +1,6 @@
 'use client'
 
-import { wagmiAdapter, projectId } from '@/utils/config'
+import { wagmiAdapter } from '@/utils/config'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react'
 import { mainnet, arbitrum, sepolia } from '@reown/appkit/networks'
@@ -10,10 +10,12 @@ import { cookieToInitialState, WagmiProvider } from 'wagmi'
 // Set up queryClient
 const queryClient = new QueryClient()
 
+// Directly set the projectId here
+const projectId = "537931f27ae9d94a71f7e559a4aff8e8"
+
 if (!projectId) {
   throw new Error('Project ID is not defined')
 }
-
 
 const metadata = {
   name: "rabble-starter-kit",
@@ -25,7 +27,7 @@ const metadata = {
 // Create the modal
 const modal = createAppKit({
   adapters: [wagmiAdapter],
-  projectId,
+  projectId, // Now using the hardcoded projectId
   networks: [mainnet, arbitrum, sepolia],
   defaultNetwork: sepolia,
   metadata: metadata,
